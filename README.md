@@ -33,10 +33,14 @@ Para ejecutar todo en Docker: `docker compose up -d --build`. No ejecutes a la v
 ## Uso diario
 
 - `/configurar 19:00 3 6 America/Mexico_City`: hora, día de reunión entre semana, día de fin de semana y zona horaria (0 domingo…6 sábado).
-- `/hoy`, `/rapido`, `/profundizar`, `/perla`, `/aplicar`, `/preparar`, `/repaso`: modos de estudio; `/terminar` cierra la sesión.
+- `/hoy`: sesión guiada de 5 pasos elegida según la reunión más próxima. Después del comando solo responde con texto o audio; no hay que escribir `/hoy` otra vez.
+- `/rapido`: recorrido de 3 pasos. `/profundizar`: investigación de 6 pasos.
+- `/perla`, `/aplicar`, `/preparar`, `/repaso`: modos especializados; `/terminar` cierra la sesión.
 - `/guardar tu idea`, `/comentarios`, `/duda tu pregunta`, `/fuentes`: notas y referencias.
 - Botones 👍/👎: feedback explícito para proponer mejoras; una valoración negativa permite añadir una corrección.
 - `/exportar`: documento JSON de tus datos. `/olvidar`: borra recuerdos no guardados. `/borrar_todo CONFIRMAR`: elimina tus datos, sin recuperación desde la aplicación.
+
+Cada turno muestra `Paso X de Y`. El modelo puede proponer un cierre, pero la aplicación no permite terminar antes del número previsto de respuestas. Al cerrar aparecen botones para seguir, profundizar, aplicar, preparar un comentario o guardar la idea. `/ayuda` muestra este recorrido dentro de Telegram y el menú de comandos se configura al arrancar.
 
 ## Ajustar nodos
 

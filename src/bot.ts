@@ -171,6 +171,20 @@ export class StudyBot {
     await this.bot.api.sendMessage(user.id,result.text.slice(0,3500));
     await this.store.saveMemory({id:key,userId:user.id,kind:'schedule',text:'sent',saved:false,sourceMessageIds:[],createdAt:date.toISOString(),expiresAt:new Date(date.getTime()+90*86400000).toISOString()});
   }
-  async startPolling() { this.timer=setInterval(()=>{this.queue=this.queue.then(()=>this.sendScheduled()).catch(()=>console.error('Scheduled session failed'));},30000); await this.bot.start(); }
+  async startPolling() {
+    await this.bot.api.setMyCommands([
+      {command:'hoy',description:'Iniciar la sesión guiada del día'},
+      {command:'rapido',description:'Sesión breve de 3 pasos'},
+      {command:'profundizar',description:'Investigar un tema en 6 pasos'},
+      {command:'perla',description:'Explorar una perla de la lectura'},
+      {command:'aplicar',description:'Buscar una aplicación personal'},
+      {command:'preparar',description:'Construir un comentario'},
+      {command:'repaso',description:'Repasar lo estudiado'},
+      {command:'estado',description:'Ver sesión y progreso'},
+      {command:'terminar',description:'Cerrar la sesión activa'},
+      {command:'ayuda',description:'Ver cómo usar el bot'}
+    ]);
+    this.timer=setInterval(()=>{this.queue=this.queue.then(()=>this.sendScheduled()).catch(()=>console.error('Scheduled session failed'));},30000); await this.bot.start();
+  }
   async stop() {if(this.timer) clearInterval(this.timer);if(this.bot.isRunning()) await this.bot.stop();}
 }

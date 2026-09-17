@@ -10,6 +10,15 @@
 - Telegram: getMe correcto y sendMessage confirmado por la API al propietario existente. Se envió una única notificación técnica identificada como prueba.
 - Imagen Docker reconstruida y servicios actualizados; PostgreSQL saludable y un propietario conservado. Puerto de base de datos restringido a localhost.
 
+### Mejora conversacional
+
+- Sesión normal: 5 pasos; rápida: 3; profundización: 6.
+- Progreso visible, reconocimiento de la respuesta anterior y una pregunta por turno.
+- El modelo no puede cerrar antes de tiempo; el cierre se controla en la aplicación.
+- Cierre con síntesis y botones para seguir, profundizar, aplicar, preparar comentario o guardar.
+- `/ayuda`, `/estado` con progreso y menú de comandos de Telegram.
+- Verificación posterior: 39/39 pruebas automatizadas; los cinco nodos conversacionales con OpenAI real; recorrido real de tres pasos con progreso y cierre controlado.
+
 ## Fallos encontrados y corregidos
 
 | Fallo | Corrección | Evidencia automatizada |
