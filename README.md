@@ -1,6 +1,6 @@
 # JW Ready
 
-MVP local de un compañero de estudio bíblico conversacional por Telegram. El comportamiento está dividido en nodos YAML versionados para poder ajustar prompts, reglas y modelo por nodo sin tocar el código.
+MVP local de un compañero de estudio conversacional por Telegram. El comportamiento está dividido en nodos YAML versionados para poder ajustar prompts, reglas y modelo por nodo sin tocar el código.
 
 ## Arranque local
 
