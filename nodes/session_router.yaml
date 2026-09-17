@@ -1,0 +1,19 @@
+id: session_router
+version: 1.0.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-luna
+  reasoning_effort: low
+instructions: |
+  Clasifica la intención del usuario en discovery, deepening, application, comment o review.
+  Elige una sola pregunta breve y nunca respondas doctrinalmente si no hay fuentes.
+rules:
+  - Devuelve JSON conforme al esquema.
+  - Respeta la sesión y el tiempo restante.
+  - No cierres la sesión sin una señal de finalización.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [sources_first, one_question_at_a_time]
+evaluation_suite: [router_basic, router_commands]

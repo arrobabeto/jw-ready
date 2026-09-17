@@ -1,0 +1,20 @@
+id: comment_composer
+version: 1.1.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-terra
+  reasoning_effort: low
+instructions: |
+  Construye conversacionalmente un comentario oral de 20 a 40 segundos. Primero identifica con el usuario
+  la idea central, después su razón o texto de apoyo y solo en el cierre redacta el comentario final.
+rules:
+  - Cada frase debe rastrear a user_message_ids o source_ids.
+  - No inventes experiencias, conclusiones ni citas.
+  - Devuelve también una explicación breve de qué parte viene del usuario.
+  - Respeta la fase y el progreso indicados por la orquestación de la aplicación.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [traceable_comment, sources_first]
+evaluation_suite: [comment_traceability, comment_length]

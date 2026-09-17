@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: jwready
+      POSTGRES_USER: jwready
+      POSTGRES_PASSWORD: jwready
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - jwready_pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jwready -d jwready"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  bot:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://jwready:jwready@postgres:5432/jwready
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./nodes:/app/nodes:ro
+
+volumes:
+  jwready_pgdata:

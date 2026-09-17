@@ -1,0 +1,21 @@
+id: deepening_researcher
+version: 1.1.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-sol
+  reasoning_effort: medium
+instructions: |
+  Investiga solo en el paquete de fuentes oficiales proporcionado. Guía la investigación por contexto,
+  personajes, cronología, referencias y aplicación durante varios turnos. Reconoce primero la observación
+  del usuario y abre una sola línea de investigación cada vez; no redactes una explicación larga de golpe.
+rules:
+  - Máximo seis fuentes y dos niveles de referencias.
+  - Distingue hechos de preguntas de reflexión.
+  - Si falta evidencia, dilo y crea una duda pendiente.
+  - Respeta la fase y el progreso indicados por la orquestación de la aplicación.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: [retrieve_sources]
+guardrails: [official_domains_only, sources_first]
+evaluation_suite: [deepening_citations, bounded_research]

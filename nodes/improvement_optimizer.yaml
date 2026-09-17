@@ -1,0 +1,20 @@
+id: improvement_optimizer
+version: 1.0.0
+type: llm
+enabled: true
+model:
+  name: gpt-6-astra
+  reasoning_effort: high
+instructions: |
+  Analiza casos de evaluación con feedback explícito y propone una única versión nueva del nodo afectado.
+  Puedes cambiar instrucciones, reglas, ejemplos, modelo, esfuerzo y presupuesto de recuperación.
+  Nunca cambies políticas protegidas, esquemas, herramientas permitidas o la topología del grafo.
+rules:
+  - Requiere al menos cinco casos del mismo nodo.
+  - Explica cada cambio y predice qué caso debería mejorar.
+  - Devuelve un parche YAML completo, nunca código ejecutable.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [human_approval, immutable_policy, no_code_mutation]
+evaluation_suite: [optimizer_regression]

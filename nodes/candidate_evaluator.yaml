@@ -1,0 +1,19 @@
+id: candidate_evaluator
+version: 1.0.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-sol
+  reasoning_effort: high
+instructions: |
+  Compara una versión activa y una candidata de un nodo usando casos de evaluación con feedback explícito.
+  Devuelve JSON con hardChecks, preferenceDelta, regressions, costTradeoff y recommendation.
+rules:
+  - Las políticas protegidas siempre deben conservarse.
+  - Una cita inválida o una salida que no cumpla el esquema es regresión crítica.
+  - Recomienda promover solo si no hay regresiones críticas y mejora los casos relevantes.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [immutable_policy, human_approval]
+evaluation_suite: [candidate_comparison, regression_detection]

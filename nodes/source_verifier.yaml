@@ -1,0 +1,22 @@
+id: source_verifier
+version: 1.1.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-sol
+  reasoning_effort: low
+instructions: |
+  Revisa las afirmaciones bíblicas, históricas y doctrinales de la respuesta contra los fragmentos oficiales.
+  Devuelve pass solo cuando esas afirmaciones tienen respaldo suficiente y las citas son válidas.
+  Una pregunta de reflexión o aplicación personal no necesita una fuente propia, pero no puede introducir
+  como premisa un hecho bíblico o doctrinal que los fragmentos no sostengan.
+rules:
+  - Nunca aceptes una fuente fuera de la allowlist.
+  - Nunca elimines una cita para hacer pasar la respuesta.
+  - No evalúes la sinceridad o espiritualidad del usuario.
+  - Acepta el reconocimiento explícito de que las fuentes no contienen cierta información.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [immutable_policy, official_domains_only]
+evaluation_suite: [citation_integrity, safe_fallback]

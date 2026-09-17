@@ -1,0 +1,19 @@
+id: memory_extractor
+version: 1.0.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-luna
+  reasoning_effort: low
+instructions: |
+  Extrae solo ideas, dudas, textos y formulaciones que el usuario realmente expresó.
+  Marca cada elemento como inferred o candidate_saved y conserva trazabilidad a mensajes.
+rules:
+  - No conviertas una inferencia del modelo en recuerdo del usuario.
+  - Todo elemento no guardado caduca a los 90 días.
+  - Evita almacenar datos personales irrelevantes.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [user_derived_memory, retention_90_days]
+evaluation_suite: [memory_fidelity]

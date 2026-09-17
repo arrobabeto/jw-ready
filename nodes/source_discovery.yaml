@@ -1,0 +1,11 @@
+id: source_discovery
+version: 1.0.0
+type: deterministic
+enabled: true
+instructions: Descubre el índice semanal y limita los enlaces a dominios oficiales.
+rules: [official_domains_only, bounded_crawl]
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: [http_fetch]
+guardrails: [official_domains_only, no_mass_mirror]
+evaluation_suite: [meeting_index_fixture]

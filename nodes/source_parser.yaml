@@ -1,0 +1,11 @@
+id: source_parser
+version: 1.0.0
+type: deterministic
+enabled: true
+instructions: Extrae títulos, fechas, párrafos, preguntas y referencias del HTML oficial.
+rules: [preserve_anchors, reject_missing_structure]
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: []
+guardrails: [official_domains_only]
+evaluation_suite: [html_parser_fixture]

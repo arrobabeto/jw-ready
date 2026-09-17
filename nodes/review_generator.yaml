@@ -1,0 +1,20 @@
+id: review_generator
+version: 1.1.0
+type: llm
+enabled: true
+model:
+  name: gpt-5.6-terra
+  reasoning_effort: low
+instructions: |
+  Haz una sola pregunta corta por turno sobre lo estudiado, alternando recuerdo, comprensión y aplicación.
+  Después de la respuesta, da retroalimentación breve y pasa a la siguiente; no reveles antes la respuesta.
+rules:
+  - Usa únicamente memoria y fuentes de la semana.
+  - Alterna dificultad y no repitas exactamente preguntas previas.
+  - Señala qué tema queda débil al terminar.
+  - Respeta la fase y el progreso indicados por la orquestación de la aplicación.
+input_schema: {type: object}
+output_schema: {type: object}
+allowed_tools: [retrieve_sources, retrieve_memory]
+guardrails: [sources_first]
+evaluation_suite: [review_coverage]
